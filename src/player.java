@@ -9,18 +9,21 @@ public class player {
     }
 
     public String getName() {
-        return name;
+        return this.name;
     }
 
     public void setName(String name) {
-        this.name = name;
+        if(!name.isEmpty()){
+            this.name = name;
+        }
     }
 
     public char getSymbol() {
-        return symbol;
+        return this.symbol;
     }
 
     public void setSymbol(char symbol) {
-        this.symbol = symbol;
+        if(symbol != '\0')
+            this.symbol = symbol;
     }
 }
