@@ -1,29 +1,29 @@
 public class Player {
 
     private String name;//player has a name
-    private char symbol;//player has a symbol to play with
+    private char sign;//player has a symbol to play with
 
-    public Player(String name, char symbol){//be able to create a new player
-        setName(name);
-        setSymbol(symbol);
+    public Player(String name, char sign) {
+        this.name = name;
+        this.sign = sign;
     }
 
     public String getName() {
-        return this.name;
+        return name;
     }
 
     public void setName(String name) {
-        if(!name.isEmpty()){
+        if(!name.isEmpty()) {
             this.name = name;
         }
     }
 
-    public char getSymbol() {
-        return this.symbol;
+    public char getSign() {
+        return sign;
     }
 
-    public void setSymbol(char symbol) {
-        if(symbol != '\0')
-            this.symbol = symbol;
+    public void setSign(char sign) {
+        if(sign != '\0')
+            this.sign = sign;
     }
 }
