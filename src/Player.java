@@ -1,9 +1,9 @@
-public class player {
+public class Player {
 
     private String name;//player has a name
     private char symbol;//player has a symbol to play with
 
-    public player(String name, char symbol){//be able to create a new player
+    public Player(String name, char symbol){//be able to create a new player
         setName(name);
         setSymbol(symbol);
     }
