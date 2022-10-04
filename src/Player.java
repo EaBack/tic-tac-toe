@@ -9,7 +9,7 @@ public class Player {
     }
 
     public String getName() {
-        return name;
+        return this.name;
     }
 
     public void setName(String name) {
@@ -19,7 +19,7 @@ public class Player {
     }
 
     public char getSign() {
-        return sign;
+        return this.sign;
     }
 
     public void setSign(char sign) {
