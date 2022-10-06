@@ -1,70 +1,91 @@
 import java.util.Scanner;
 
 public class TicTacToe {
+    private static Player player1;
+    private static Player player2;
 
-    private Player player1, player2;
-    private Board board;
     public static void main(String[] args) {
-        TicTacToe t = new TicTacToe();
-        t.gameOn();
+        //declare the board
+        char[][] board = {{' ', ' ', ' ',},
+                {' ', ' ', ' ',},
+                {' ', ' ', ' ',}};
 
+        System.out.println("Welcome to TicTacToe, 3-in-a-row!");
+        Scanner scanner = new Scanner(System.in);
+        // Players input
+        player1 = takePlayerInput(1);
+        // to choose if you want to play against other human player or computer
+        Scanner YesNo = new Scanner(System.in);
+        System.out.println("Would you like to play against a friend? (y/n)");
+        String player1Choice = YesNo.next();
+        if (player1Choice.equals("y")) {
+            player2 = takePlayerInput(2);
+            while(player1.getPlayerSign() == player2.getPlayerSign()){
+                System.out.println("Symbol Already taken !! Pick another symbol !!");
+                char sign = scanner.next().charAt(0);
+                player2.setPlayerSign(sign);
+            }
+            gameFlow(board,scanner);
+        } else if (player1Choice.equals("n")) {
+            gameFlow(board, scanner);
         }
 
-    public void gameOn() {//gameOn start playing the game)
-            Scanner sc = new Scanner(System.in);
-            player1 = playerInput(1);
-            player2 = playerInput(2);
-            while(player1.getSign() == player2.getSign()){
-                System.out.println("That sign is already taken, choose a different one.");
-                char sign = sc.next().charAt(0);
-                player2.setSign(sign);
-            }
-            //print the board
-            board = new Board();//previous content player1.getSign(), player2.getSign()
-            //Play the game
-            boolean player1Turn = true;// player 1 starts the game and we create turnbase
-            int status = Board.NOT_DONE_YET;
-            while (status == Board.NOT_DONE_YET || status == Board.IMPOSSIBLE_MOVE) {
-                if(player1Turn){
-                    System.out.println("It's " + player1.getName() + "'s turn");
-                    System.out.println("Enter x-coordinate: ");
-                    int x = sc.nextInt();
-                    System.out.println("Enter y-coordinate: ");
-                    int y = sc.nextInt();
-                    status = board.moves(player1.getSign(), x, y);
-                    if(status != Board.IMPOSSIBLE_MOVE){
-                        player1Turn = false;
-                        board.printBoard();
-                    }else {System.out.println("Impossible Move !! Please Try Again.");
-                    }
-                }else{
-                    System.out.println("It's " + player2.getName() + "'s turn");
-                    System.out.println("Enter x-coordinate: ");
-                    int x = sc.nextInt();
-                    System.out.println("Enter y-coordinate: ");
-                    int y = sc.nextInt();
-                    status = board.moves(player2.getSign(), x, y);
-                    if(status != Board.IMPOSSIBLE_MOVE){
-                        player1Turn = true;
-                        board.printBoard();
-                    }else {System.out.println("Impossible Move !! Please Try Again.");
-                    }
-                }
+        //gameFlow(board, scanner);
+    }
 
+    private static void gameFlow(char[][] board, Scanner scanner) {
+        Board.printTheBoard(board);
+
+        while (true) {
+            //create the players turn
+            playerTurn(board, scanner);
+            if (Board.gameOver(board)) {
+                break;
             }
+            Board.printTheBoard(board);
+            //player 2 or computer player
+             /*anteckning
+                         do {print want to write
+                        string name = sc.nextLine();
+                        if (name.equals("q)){
+                        print iets; play = false
+                        break;
+                        }
+                        }while (play = true );
+                         */
+            Computerplayer.computer(board);
+            if (Board.gameOver(board)) {
+                break;
+            }
+            Board.printTheBoard(board);
+
         }
-    private Player playerInput(int number) {// created method to get players input
-        Scanner userInput = new Scanner(System.in);
-// getting players names/input
-        System.out.println("Hi, welcome to tictactoe, 3-in-a-row!");
-        System.out.println("Rule recap: the first one to have 3 signs in a row wins the game.");
-        System.out.println("If nobody is able to get 3-in-a-row and the bord is full, it's a tie!");
-        System.out.println("Who will be player " + number + "? (write down you name)");
-        String name = userInput.nextLine();
-        System.out.println("Select your sign player " + number +  ". (write down your sign)");
-        char sign = userInput.next().charAt(0);
-        Player p = new Player(name,sign);
+        scanner.close();
+    }
+
+    private static Player takePlayerInput(int number){
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Enter Player " + number + "'s name");
+        String name = scanner.nextLine();
+        System.out.println("Enter Player " + number + " sign");
+        char playerSign = scanner.next().charAt(0);
+        Player p = new Player(name, playerSign);
+        System.out.println("Name player " + number + " is " + name + " and player " + number  + " sign is: " + playerSign);
         return p;
     }
 
+    static void playerTurn(char[][] board, Scanner scanner) { // the human players turn
+        String playerInput;
+        while (true) {
+            System.out.println(Player.getName() + " it's your turn. ");
+            System.out.println("Choose your spot (1-9) to set a sign and press Enter.");
+            playerInput = scanner.nextLine();
+            if (Board.isMoveValid(board, playerInput)) {
+                break;
+            } else {
+                System.out.println(playerInput + "  is not a valid move, please try again.");
+            }
+        }
+        Board.move(board, playerInput, Player.playerSign);// calling on method move to place a move
+    }
 }

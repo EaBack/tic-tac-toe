@@ -1,15 +1,17 @@
+import java.util.Scanner;
+
 public class Player {
 
-    private String name;//player has a name
-    private char sign;//player has a symbol to play with
+    private static String name;
+    static char playerSign;
 
-    public Player(String name, char sign) {
+    public Player(String name, char playerSign) {
         this.name = name;
-        this.sign = sign;
+        this.playerSign = playerSign;
     }
 
-    public String getName() {
-        return this.name;
+    public static String getName() {
+        return name;
     }
 
     public void setName(String name) {
@@ -18,12 +20,13 @@ public class Player {
         }
     }
 
-    public char getSign() {
-        return this.sign;
+    public char getPlayerSign() {
+        return playerSign;
     }
 
-    public void setSign(char sign) {
-        if(sign != '\0')
-            this.sign = sign;
+    public void setPlayerSign(char playerSign) {
+        if (playerSign != '\0') {
+            this.playerSign = playerSign;
+        }
     }
 }
