@@ -1,6 +1,6 @@
 import java.util.Random;
 /* unkar inte så används inte än
-public class Computerplayer extends Player{
+public class Computerplayer extends Player{// under construction
 
     public Computerplayer(String name, char playerSign) {
         super(name, playerSign);
