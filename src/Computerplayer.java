@@ -1,5 +1,5 @@
 import java.util.Random;
-/*
+/* unkar inte så används inte än
 public class Computerplayer extends Player{
 
     public Computerplayer(String name, char playerSign) {
