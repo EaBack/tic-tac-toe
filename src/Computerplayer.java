@@ -1,5 +1,5 @@
 import java.util.Random;
-
+/*
 public class Computerplayer extends Player{
 
     public Computerplayer(String name, char playerSign) {
@@ -16,6 +16,7 @@ public class Computerplayer extends Player{
             }
         }
         System.out.println("Computer chose " + computerTurn);//printing out what the computer did
-        Board.move(board, Integer.toString(computerTurn), 'C');
+        Board.move(board, Integer.toString(computerTurn), playerSign);
     }
 }
+*/
